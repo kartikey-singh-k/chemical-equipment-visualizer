@@ -18,7 +18,7 @@ const App = () => {
 
   const fetchHistory = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:8000/api/history/");
+      const res = await axios.get("https://chem-backend-rnle.onrender.com/api/history/");
       setHistory(res.data);
     } catch (err) { console.error(err); }
   };
@@ -29,7 +29,7 @@ const App = () => {
     formData.append("file", file);
 
     try {
-      const res = await axios.post("http://127.0.0.1:8000/api/analyze/", formData);
+      const res = await axios.post("https://chem-backend-rnle.onrender.com/api/analyze/", formData);
       setStats(res.data.stats);
       setTableData(res.data.data);
       fetchHistory(); // Refresh history
@@ -41,7 +41,7 @@ const App = () => {
   const downloadPDF = async () => {
     if(!stats) return;
     try {
-        const res = await axios.post("http://127.0.0.1:8000/api/report/", stats, { responseType: 'blob' });
+        const res = await axios.post("https://chem-backend-rnle.onrender.com/api/report/", stats, { responseType: 'blob' });
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement('a');
         link.href = url;
